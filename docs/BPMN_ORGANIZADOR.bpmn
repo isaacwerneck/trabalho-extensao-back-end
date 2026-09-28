@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Organizador" targetNamespace="http://organizador-trabalhos.local/bpmn">
+  <bpmn:dataStore id="DataStore_Banco" name="Banco de dados SQLite" />
+  <bpmn:process id="Process_OrganizarTrabalho" name="Organizar trabalho em grupo" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Principal">
+      <bpmn:lane id="Lane_Usuario" name="Usuário">
+        <bpmn:flowNodeRef>StartEvent_Inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AcessarSistema</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_PossuiConta</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_InformarLogin</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_InformarCadastro</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_VisualizarDashboard</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_AcaoGrupo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_InformarNomeGrupo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_InformarCodigo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_VisualizarGrupo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_InformarTarefa</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_VisualizarTarefas</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AlterarEstado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_VisualizarAtualizacao</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Sair</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Sistema" name="Sistema">
+        <bpmn:flowNodeRef>Task_ValidarLogin</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_LoginValido</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ExibirErroLogin</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ValidarCadastro</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_CadastroValido</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ExibirErroCadastro</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CriarConta</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CriarSessao</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CriarGrupo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_RegistrarCriador</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_LocalizarGrupo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_CodigoValido</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ExibirErroCodigo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_JaParticipa</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_RegistrarMembro</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_UnirGrupo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ValidarTarefa</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_TarefaValida</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ExibirErroTarefa</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_SalvarTarefa</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ValidarPermissao</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Autorizado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_NegarAcesso</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_Negado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AtualizarEstado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_EncerrarSessao</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_Fim</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+
+    <bpmn:startEvent id="StartEvent_Inicio" name="Início">
+      <bpmn:outgoing>Flow_01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_AcessarSistema" name="Acessar o sistema">
+      <bpmn:incoming>Flow_01</bpmn:incoming>
+      <bpmn:outgoing>Flow_02</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_PossuiConta" name="Possui conta?">
+      <bpmn:incoming>Flow_02</bpmn:incoming>
+      <bpmn:outgoing>Flow_03_Sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_03_Nao</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_InformarLogin" name="Informar usuário e senha">
+      <bpmn:incoming>Flow_03_Sim</bpmn:incoming>
+      <bpmn:incoming>Flow_06_Nao</bpmn:incoming>
+      <bpmn:outgoing>Flow_04</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_ValidarLogin" name="Validar credenciais">
+      <bpmn:incoming>Flow_04</bpmn:incoming>
+      <bpmn:outgoing>Flow_05</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_LoginValido" name="Credenciais válidas?">
+      <bpmn:incoming>Flow_05</bpmn:incoming>
+      <bpmn:outgoing>Flow_06_Sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_06_Erro</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_ExibirErroLogin" name="Exibir erro de login">
+      <bpmn:incoming>Flow_06_Erro</bpmn:incoming>
+      <bpmn:outgoing>Flow_06_Nao</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:userTask id="Task_InformarCadastro" name="Informar dados de cadastro">
+      <bpmn:incoming>Flow_03_Nao</bpmn:incoming>
+      <bpmn:incoming>Flow_09_Nao</bpmn:incoming>
+      <bpmn:outgoing>Flow_07</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_ValidarCadastro" name="Validar cadastro">
+      <bpmn:incoming>Flow_07</bpmn:incoming>
+      <bpmn:outgoing>Flow_08</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_CadastroValido" name="Dados válidos?">
+      <bpmn:incoming>Flow_08</bpmn:incoming>
+      <bpmn:outgoing>Flow_09_Sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_09_Erro</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_ExibirErroCadastro" name="Exibir erro de cadastro">
+      <bpmn:incoming>Flow_09_Erro</bpmn:incoming>
+      <bpmn:outgoing>Flow_09_Nao</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_CriarConta" name="Proteger senha e criar conta">
+      <bpmn:incoming>Flow_09_Sim</bpmn:incoming>
+      <bpmn:outgoing>Flow_10</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_CriarSessao" name="Criar sessão persistente">
+      <bpmn:incoming>Flow_06_Sim</bpmn:incoming>
+      <bpmn:incoming>Flow_10</bpmn:incoming>
+      <bpmn:outgoing>Flow_11</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_VisualizarDashboard" name="Visualizar grupos">
+      <bpmn:incoming>Flow_11</bpmn:incoming>
+      <bpmn:outgoing>Flow_12</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_AcaoGrupo" name="Criar ou entrar em grupo?">
+      <bpmn:incoming>Flow_12</bpmn:incoming>
+      <bpmn:outgoing>Flow_13_Criar</bpmn:outgoing>
+      <bpmn:outgoing>Flow_13_Entrar</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:userTask id="Task_InformarNomeGrupo" name="Informar nome do grupo">
+      <bpmn:incoming>Flow_13_Criar</bpmn:incoming>
+      <bpmn:outgoing>Flow_14</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_CriarGrupo" name="Criar grupo e código único">
+      <bpmn:incoming>Flow_14</bpmn:incoming>
+      <bpmn:outgoing>Flow_15</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_RegistrarCriador" name="Registrar criador como membro">
+      <bpmn:incoming>Flow_15</bpmn:incoming>
+      <bpmn:outgoing>Flow_16</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:userTask id="Task_InformarCodigo" name="Informar código do grupo">
+      <bpmn:incoming>Flow_13_Entrar</bpmn:incoming>
+      <bpmn:incoming>Flow_19_Voltar</bpmn:incoming>
+      <bpmn:outgoing>Flow_17</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_LocalizarGrupo" name="Localizar grupo">
+      <bpmn:incoming>Flow_17</bpmn:incoming>
+      <bpmn:outgoing>Flow_18</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_CodigoValido" name="Código válido?">
+      <bpmn:incoming>Flow_18</bpmn:incoming>
+      <bpmn:outgoing>Flow_19_Sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_19_Nao</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_ExibirErroCodigo" name="Exibir código inválido">
+      <bpmn:incoming>Flow_19_Nao</bpmn:incoming>
+      <bpmn:outgoing>Flow_19_Voltar</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_JaParticipa" name="Já participa?">
+      <bpmn:incoming>Flow_19_Sim</bpmn:incoming>
+      <bpmn:outgoing>Flow_20_Sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_20_Nao</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_RegistrarMembro" name="Registrar novo membro">
+      <bpmn:incoming>Flow_20_Nao</bpmn:incoming>
+      <bpmn:outgoing>Flow_21</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_UnirGrupo">
+      <bpmn:incoming>Flow_16</bpmn:incoming>
+      <bpmn:incoming>Flow_20_Sim</bpmn:incoming>
+      <bpmn:incoming>Flow_21</bpmn:incoming>
+      <bpmn:outgoing>Flow_22</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:userTask id="Task_VisualizarGrupo" name="Visualizar grupo e código">
+      <bpmn:incoming>Flow_22</bpmn:incoming>
+      <bpmn:outgoing>Flow_23</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_InformarTarefa" name="Informar título da tarefa">
+      <bpmn:incoming>Flow_23</bpmn:incoming>
+      <bpmn:incoming>Flow_26_Voltar</bpmn:incoming>
+      <bpmn:outgoing>Flow_24</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_ValidarTarefa" name="Validar tarefa e participação">
+      <bpmn:incoming>Flow_24</bpmn:incoming>
+      <bpmn:outgoing>Flow_25</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_TarefaValida" name="Tarefa válida?">
+      <bpmn:incoming>Flow_25</bpmn:incoming>
+      <bpmn:outgoing>Flow_26_Sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_26_Nao</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_ExibirErroTarefa" name="Exibir erro da tarefa">
+      <bpmn:incoming>Flow_26_Nao</bpmn:incoming>
+      <bpmn:outgoing>Flow_26_Voltar</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_SalvarTarefa" name="Salvar tarefa pendente">
+      <bpmn:incoming>Flow_26_Sim</bpmn:incoming>
+      <bpmn:outgoing>Flow_27</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_VisualizarTarefas" name="Visualizar tarefas compartilhadas">
+      <bpmn:incoming>Flow_27</bpmn:incoming>
+      <bpmn:outgoing>Flow_28</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_AlterarEstado" name="Marcar tarefa como concluída">
+      <bpmn:incoming>Flow_28</bpmn:incoming>
+      <bpmn:outgoing>Flow_29</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_ValidarPermissao" name="Validar participação no grupo">
+      <bpmn:incoming>Flow_29</bpmn:incoming>
+      <bpmn:outgoing>Flow_30</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_Autorizado" name="Acesso autorizado?">
+      <bpmn:incoming>Flow_30</bpmn:incoming>
+      <bpmn:outgoing>Flow_31_Sim</bpmn:outgoing>
+      <bpmn:outgoing>Flow_31_Nao</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_NegarAcesso" name="Negar alteração">
+      <bpmn:incoming>Flow_31_Nao</bpmn:incoming>
+      <bpmn:outgoing>Flow_32_Negado</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_Negado" name="Acesso negado">
+      <bpmn:incoming>Flow_32_Negado</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_AtualizarEstado" name="Atualizar estado no banco">
+      <bpmn:incoming>Flow_31_Sim</bpmn:incoming>
+      <bpmn:outgoing>Flow_32</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_VisualizarAtualizacao" name="Visualizar tarefa atualizada">
+      <bpmn:incoming>Flow_32</bpmn:incoming>
+      <bpmn:outgoing>Flow_33</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_Sair" name="Sair do sistema">
+      <bpmn:incoming>Flow_33</bpmn:incoming>
+      <bpmn:outgoing>Flow_34</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_EncerrarSessao" name="Invalidar sessão">
+      <bpmn:incoming>Flow_34</bpmn:incoming>
+      <bpmn:outgoing>Flow_35</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_Fim" name="Fim">
+      <bpmn:incoming>Flow_35</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:dataStoreReference id="DataStoreReference_SQLite" name="SQLite" dataStoreRef="DataStore_Banco" />
+    <bpmn:association id="Association_Conta_Banco" sourceRef="Task_CriarConta" targetRef="DataStoreReference_SQLite" />
+    <bpmn:association id="Association_Grupo_Banco" sourceRef="Task_CriarGrupo" targetRef="DataStoreReference_SQLite" />
+    <bpmn:association id="Association_Tarefa_Banco" sourceRef="Task_SalvarTarefa" targetRef="DataStoreReference_SQLite" />
+    <bpmn:association id="Association_Estado_Banco" sourceRef="Task_AtualizarEstado" targetRef="DataStoreReference_SQLite" />
+
+    <bpmn:sequenceFlow id="Flow_01" sourceRef="StartEvent_Inicio" targetRef="Task_AcessarSistema" />
+    <bpmn:sequenceFlow id="Flow_02" sourceRef="Task_AcessarSistema" targetRef="Gateway_PossuiConta" />
+    <bpmn:sequenceFlow id="Flow_03_Sim" name="Sim" sourceRef="Gateway_PossuiConta" targetRef="Task_InformarLogin" />
+    <bpmn:sequenceFlow id="Flow_03_Nao" name="Não" sourceRef="Gateway_PossuiConta" targetRef="Task_InformarCadastro" />
+    <bpmn:sequenceFlow id="Flow_04" sourceRef="Task_InformarLogin" targetRef="Task_ValidarLogin" />
+    <bpmn:sequenceFlow id="Flow_05" sourceRef="Task_ValidarLogin" targetRef="Gateway_LoginValido" />
+    <bpmn:sequenceFlow id="Flow_06_Sim" name="Sim" sourceRef="Gateway_LoginValido" targetRef="Task_CriarSessao" />
+    <bpmn:sequenceFlow id="Flow_06_Erro" name="Não" sourceRef="Gateway_LoginValido" targetRef="Task_ExibirErroLogin" />
+    <bpmn:sequenceFlow id="Flow_06_Nao" sourceRef="Task_ExibirErroLogin" targetRef="Task_InformarLogin" />
+    <bpmn:sequenceFlow id="Flow_07" sourceRef="Task_InformarCadastro" targetRef="Task_ValidarCadastro" />
+    <bpmn:sequenceFlow id="Flow_08" sourceRef="Task_ValidarCadastro" targetRef="Gateway_CadastroValido" />
+    <bpmn:sequenceFlow id="Flow_09_Sim" name="Sim" sourceRef="Gateway_CadastroValido" targetRef="Task_CriarConta" />
+    <bpmn:sequenceFlow id="Flow_09_Erro" name="Não" sourceRef="Gateway_CadastroValido" targetRef="Task_ExibirErroCadastro" />
+    <bpmn:sequenceFlow id="Flow_09_Nao" sourceRef="Task_ExibirErroCadastro" targetRef="Task_InformarCadastro" />
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_CriarConta" targetRef="Task_CriarSessao" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_CriarSessao" targetRef="Task_VisualizarDashboard" />
+    <bpmn:sequenceFlow id="Flow_12" sourceRef="Task_VisualizarDashboard" targetRef="Gateway_AcaoGrupo" />
+    <bpmn:sequenceFlow id="Flow_13_Criar" name="Criar" sourceRef="Gateway_AcaoGrupo" targetRef="Task_InformarNomeGrupo" />
+    <bpmn:sequenceFlow id="Flow_13_Entrar" name="Entrar" sourceRef="Gateway_AcaoGrupo" targetRef="Task_InformarCodigo" />
+    <bpmn:sequenceFlow id="Flow_14" sourceRef="Task_InformarNomeGrupo" targetRef="Task_CriarGrupo" />
+    <bpmn:sequenceFlow id="Flow_15" sourceRef="Task_CriarGrupo" targetRef="Task_RegistrarCriador" />
+    <bpmn:sequenceFlow id="Flow_16" sourceRef="Task_RegistrarCriador" targetRef="Gateway_UnirGrupo" />
+    <bpmn:sequenceFlow id="Flow_17" sourceRef="Task_InformarCodigo" targetRef="Task_LocalizarGrupo" />
+    <bpmn:sequenceFlow id="Flow_18" sourceRef="Task_LocalizarGrupo" targetRef="Gateway_CodigoValido" />
+    <bpmn:sequenceFlow id="Flow_19_Sim" name="Sim" sourceRef="Gateway_CodigoValido" targetRef="Gateway_JaParticipa" />
+    <bpmn:sequenceFlow id="Flow_19_Nao" name="Não" sourceRef="Gateway_CodigoValido" targetRef="Task_ExibirErroCodigo" />
+    <bpmn:sequenceFlow id="Flow_19_Voltar" sourceRef="Task_ExibirErroCodigo" targetRef="Task_InformarCodigo" />
+    <bpmn:sequenceFlow id="Flow_20_Sim" name="Sim" sourceRef="Gateway_JaParticipa" targetRef="Gateway_UnirGrupo" />
+    <bpmn:sequenceFlow id="Flow_20_Nao" name="Não" sourceRef="Gateway_JaParticipa" targetRef="Task_RegistrarMembro" />
+    <bpmn:sequenceFlow id="Flow_21" sourceRef="Task_RegistrarMembro" targetRef="Gateway_UnirGrupo" />
+    <bpmn:sequenceFlow id="Flow_22" sourceRef="Gateway_UnirGrupo" targetRef="Task_VisualizarGrupo" />
+    <bpmn:sequenceFlow id="Flow_23" sourceRef="Task_VisualizarGrupo" targetRef="Task_InformarTarefa" />
+    <bpmn:sequenceFlow id="Flow_24" sourceRef="Task_InformarTarefa" targetRef="Task_ValidarTarefa" />
+    <bpmn:sequenceFlow id="Flow_25" sourceRef="Task_ValidarTarefa" targetRef="Gateway_TarefaValida" />
+    <bpmn:sequenceFlow id="Flow_26_Sim" name="Sim" sourceRef="Gateway_TarefaValida" targetRef="Task_SalvarTarefa" />
+    <bpmn:sequenceFlow id="Flow_26_Nao" name="Não" sourceRef="Gateway_TarefaValida" targetRef="Task_ExibirErroTarefa" />
+    <bpmn:sequenceFlow id="Flow_26_Voltar" sourceRef="Task_ExibirErroTarefa" targetRef="Task_InformarTarefa" />
+    <bpmn:sequenceFlow id="Flow_27" sourceRef="Task_SalvarTarefa" targetRef="Task_VisualizarTarefas" />
+    <bpmn:sequenceFlow id="Flow_28" sourceRef="Task_VisualizarTarefas" targetRef="Task_AlterarEstado" />
+    <bpmn:sequenceFlow id="Flow_29" sourceRef="Task_AlterarEstado" targetRef="Task_ValidarPermissao" />
+    <bpmn:sequenceFlow id="Flow_30" sourceRef="Task_ValidarPermissao" targetRef="Gateway_Autorizado" />
+    <bpmn:sequenceFlow id="Flow_31_Sim" name="Sim" sourceRef="Gateway_Autorizado" targetRef="Task_AtualizarEstado" />
+    <bpmn:sequenceFlow id="Flow_31_Nao" name="Não" sourceRef="Gateway_Autorizado" targetRef="Task_NegarAcesso" />
+    <bpmn:sequenceFlow id="Flow_32_Negado" sourceRef="Task_NegarAcesso" targetRef="EndEvent_Negado" />
+    <bpmn:sequenceFlow id="Flow_32" sourceRef="Task_AtualizarEstado" targetRef="Task_VisualizarAtualizacao" />
+    <bpmn:sequenceFlow id="Flow_33" sourceRef="Task_VisualizarAtualizacao" targetRef="Task_Sair" />
+    <bpmn:sequenceFlow id="Flow_34" sourceRef="Task_Sair" targetRef="Task_EncerrarSessao" />
+    <bpmn:sequenceFlow id="Flow_35" sourceRef="Task_EncerrarSessao" targetRef="EndEvent_Fim" />
+  </bpmn:process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Organizador">
+    <bpmndi:BPMNPlane id="BPMNPlane_Organizador" bpmnElement="Process_OrganizarTrabalho">
+      <bpmndi:BPMNShape id="Lane_Usuario_di" bpmnElement="Lane_Usuario" isHorizontal="true"><dc:Bounds x="80" y="80" width="4320" height="300" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Sistema_di" bpmnElement="Lane_Sistema" isHorizontal="true"><dc:Bounds x="80" y="380" width="4320" height="360" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_Inicio_di" bpmnElement="StartEvent_Inicio"><dc:Bounds x="130" y="210" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AcessarSistema_di" bpmnElement="Task_AcessarSistema"><dc:Bounds x="200" y="188" width="120" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_PossuiConta_di" bpmnElement="Gateway_PossuiConta" isMarkerVisible="true"><dc:Bounds x="360" y="203" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_InformarLogin_di" bpmnElement="Task_InformarLogin"><dc:Bounds x="455" y="125" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_InformarCadastro_di" bpmnElement="Task_InformarCadastro"><dc:Bounds x="455" y="275" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ValidarLogin_di" bpmnElement="Task_ValidarLogin"><dc:Bounds x="625" y="410" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_LoginValido_di" bpmnElement="Gateway_LoginValido" isMarkerVisible="true"><dc:Bounds x="795" y="425" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ExibirErroLogin_di" bpmnElement="Task_ExibirErroLogin"><dc:Bounds x="880" y="410" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ValidarCadastro_di" bpmnElement="Task_ValidarCadastro"><dc:Bounds x="625" y="585" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_CadastroValido_di" bpmnElement="Gateway_CadastroValido" isMarkerVisible="true"><dc:Bounds x="795" y="600" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ExibirErroCadastro_di" bpmnElement="Task_ExibirErroCadastro"><dc:Bounds x="880" y="635" width="130" height="70" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CriarConta_di" bpmnElement="Task_CriarConta"><dc:Bounds x="880" y="540" width="130" height="70" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CriarSessao_di" bpmnElement="Task_CriarSessao"><dc:Bounds x="1050" y="440" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_VisualizarDashboard_di" bpmnElement="Task_VisualizarDashboard"><dc:Bounds x="1230" y="188" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AcaoGrupo_di" bpmnElement="Gateway_AcaoGrupo" isMarkerVisible="true"><dc:Bounds x="1400" y="203" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_InformarNomeGrupo_di" bpmnElement="Task_InformarNomeGrupo"><dc:Bounds x="1490" y="115" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_InformarCodigo_di" bpmnElement="Task_InformarCodigo"><dc:Bounds x="1490" y="280" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CriarGrupo_di" bpmnElement="Task_CriarGrupo"><dc:Bounds x="1660" y="410" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_RegistrarCriador_di" bpmnElement="Task_RegistrarCriador"><dc:Bounds x="1840" y="410" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_LocalizarGrupo_di" bpmnElement="Task_LocalizarGrupo"><dc:Bounds x="1660" y="570" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_CodigoValido_di" bpmnElement="Gateway_CodigoValido" isMarkerVisible="true"><dc:Bounds x="1830" y="585" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ExibirErroCodigo_di" bpmnElement="Task_ExibirErroCodigo"><dc:Bounds x="1920" y="635" width="130" height="70" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_JaParticipa_di" bpmnElement="Gateway_JaParticipa" isMarkerVisible="true"><dc:Bounds x="1920" y="535" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_RegistrarMembro_di" bpmnElement="Task_RegistrarMembro"><dc:Bounds x="2020" y="570" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_UnirGrupo_di" bpmnElement="Gateway_UnirGrupo" isMarkerVisible="true"><dc:Bounds x="2190" y="445" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_VisualizarGrupo_di" bpmnElement="Task_VisualizarGrupo"><dc:Bounds x="2280" y="188" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_InformarTarefa_di" bpmnElement="Task_InformarTarefa"><dc:Bounds x="2450" y="188" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ValidarTarefa_di" bpmnElement="Task_ValidarTarefa"><dc:Bounds x="2620" y="410" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_TarefaValida_di" bpmnElement="Gateway_TarefaValida" isMarkerVisible="true"><dc:Bounds x="2800" y="425" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ExibirErroTarefa_di" bpmnElement="Task_ExibirErroTarefa"><dc:Bounds x="2890" y="535" width="130" height="70" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_SalvarTarefa_di" bpmnElement="Task_SalvarTarefa"><dc:Bounds x="2890" y="405" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_VisualizarTarefas_di" bpmnElement="Task_VisualizarTarefas"><dc:Bounds x="3060" y="188" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AlterarEstado_di" bpmnElement="Task_AlterarEstado"><dc:Bounds x="3240" y="188" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ValidarPermissao_di" bpmnElement="Task_ValidarPermissao"><dc:Bounds x="3420" y="410" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Autorizado_di" bpmnElement="Gateway_Autorizado" isMarkerVisible="true"><dc:Bounds x="3600" y="425" width="50" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_NegarAcesso_di" bpmnElement="Task_NegarAcesso"><dc:Bounds x="3690" y="550" width="120" height="70" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_Negado_di" bpmnElement="EndEvent_Negado"><dc:Bounds x="3850" y="567" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AtualizarEstado_di" bpmnElement="Task_AtualizarEstado"><dc:Bounds x="3690" y="405" width="130" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_VisualizarAtualizacao_di" bpmnElement="Task_VisualizarAtualizacao"><dc:Bounds x="3860" y="188" width="140" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Sair_di" bpmnElement="Task_Sair"><dc:Bounds x="4040" y="188" width="110" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_EncerrarSessao_di" bpmnElement="Task_EncerrarSessao"><dc:Bounds x="4040" y="440" width="120" height="80" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_Fim_di" bpmnElement="EndEvent_Fim"><dc:Bounds x="4230" y="462" width="36" height="36" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_SQLite_di" bpmnElement="DataStoreReference_SQLite"><dc:Bounds x="3140" y="620" width="50" height="50" /></bpmndi:BPMNShape>
+
+      <bpmndi:BPMNEdge id="Flow_01_di" bpmnElement="Flow_01"><di:waypoint x="166" y="228" /><di:waypoint x="200" y="228" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02_di" bpmnElement="Flow_02"><di:waypoint x="320" y="228" /><di:waypoint x="360" y="228" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03_Sim_di" bpmnElement="Flow_03_Sim"><di:waypoint x="385" y="203" /><di:waypoint x="385" y="165" /><di:waypoint x="455" y="165" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03_Nao_di" bpmnElement="Flow_03_Nao"><di:waypoint x="385" y="253" /><di:waypoint x="385" y="315" /><di:waypoint x="455" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04_di" bpmnElement="Flow_04"><di:waypoint x="585" y="165" /><di:waypoint x="690" y="165" /><di:waypoint x="690" y="410" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05_di" bpmnElement="Flow_05"><di:waypoint x="755" y="450" /><di:waypoint x="795" y="450" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06_Sim_di" bpmnElement="Flow_06_Sim"><di:waypoint x="845" y="450" /><di:waypoint x="1050" y="480" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06_Erro_di" bpmnElement="Flow_06_Erro"><di:waypoint x="820" y="475" /><di:waypoint x="820" y="500" /><di:waypoint x="945" y="500" /><di:waypoint x="945" y="490" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06_Nao_di" bpmnElement="Flow_06_Nao"><di:waypoint x="945" y="410" /><di:waypoint x="945" y="90" /><di:waypoint x="520" y="90" /><di:waypoint x="520" y="125" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07_di" bpmnElement="Flow_07"><di:waypoint x="585" y="315" /><di:waypoint x="690" y="315" /><di:waypoint x="690" y="585" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08_di" bpmnElement="Flow_08"><di:waypoint x="755" y="625" /><di:waypoint x="795" y="625" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09_Sim_di" bpmnElement="Flow_09_Sim"><di:waypoint x="845" y="625" /><di:waypoint x="860" y="625" /><di:waypoint x="860" y="575" /><di:waypoint x="880" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09_Erro_di" bpmnElement="Flow_09_Erro"><di:waypoint x="820" y="650" /><di:waypoint x="820" y="670" /><di:waypoint x="880" y="670" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09_Nao_di" bpmnElement="Flow_09_Nao"><di:waypoint x="945" y="705" /><di:waypoint x="600" y="705" /><di:waypoint x="600" y="315" /><di:waypoint x="585" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10"><di:waypoint x="1010" y="575" /><di:waypoint x="1120" y="575" /><di:waypoint x="1120" y="520" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11"><di:waypoint x="1190" y="480" /><di:waypoint x="1295" y="480" /><di:waypoint x="1295" y="268" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12"><di:waypoint x="1360" y="228" /><di:waypoint x="1400" y="228" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13_Criar_di" bpmnElement="Flow_13_Criar"><di:waypoint x="1425" y="203" /><di:waypoint x="1425" y="155" /><di:waypoint x="1490" y="155" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13_Entrar_di" bpmnElement="Flow_13_Entrar"><di:waypoint x="1425" y="253" /><di:waypoint x="1425" y="320" /><di:waypoint x="1490" y="320" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14"><di:waypoint x="1620" y="155" /><di:waypoint x="1730" y="155" /><di:waypoint x="1730" y="410" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15_di" bpmnElement="Flow_15"><di:waypoint x="1800" y="450" /><di:waypoint x="1840" y="450" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16_di" bpmnElement="Flow_16"><di:waypoint x="1980" y="450" /><di:waypoint x="2190" y="470" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17_di" bpmnElement="Flow_17"><di:waypoint x="1620" y="320" /><di:waypoint x="1725" y="320" /><di:waypoint x="1725" y="570" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18_di" bpmnElement="Flow_18"><di:waypoint x="1790" y="610" /><di:waypoint x="1830" y="610" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19_Sim_di" bpmnElement="Flow_19_Sim"><di:waypoint x="1880" y="610" /><di:waypoint x="1945" y="610" /><di:waypoint x="1945" y="585" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19_Nao_di" bpmnElement="Flow_19_Nao"><di:waypoint x="1855" y="635" /><di:waypoint x="1855" y="670" /><di:waypoint x="1920" y="670" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19_Voltar_di" bpmnElement="Flow_19_Voltar"><di:waypoint x="1985" y="705" /><di:waypoint x="1640" y="705" /><di:waypoint x="1640" y="320" /><di:waypoint x="1620" y="320" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_20_Sim_di" bpmnElement="Flow_20_Sim"><di:waypoint x="1970" y="560" /><di:waypoint x="2215" y="560" /><di:waypoint x="2215" y="495" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_20_Nao_di" bpmnElement="Flow_20_Nao"><di:waypoint x="1945" y="585" /><di:waypoint x="1945" y="610" /><di:waypoint x="2020" y="610" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_21_di" bpmnElement="Flow_21"><di:waypoint x="2150" y="610" /><di:waypoint x="2215" y="610" /><di:waypoint x="2215" y="495" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_22_di" bpmnElement="Flow_22"><di:waypoint x="2240" y="470" /><di:waypoint x="2345" y="470" /><di:waypoint x="2345" y="268" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_23_di" bpmnElement="Flow_23"><di:waypoint x="2410" y="228" /><di:waypoint x="2450" y="228" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_24_di" bpmnElement="Flow_24"><di:waypoint x="2580" y="228" /><di:waypoint x="2690" y="228" /><di:waypoint x="2690" y="410" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_25_di" bpmnElement="Flow_25"><di:waypoint x="2760" y="450" /><di:waypoint x="2800" y="450" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_26_Sim_di" bpmnElement="Flow_26_Sim"><di:waypoint x="2850" y="450" /><di:waypoint x="2890" y="445" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_26_Nao_di" bpmnElement="Flow_26_Nao"><di:waypoint x="2825" y="475" /><di:waypoint x="2825" y="570" /><di:waypoint x="2890" y="570" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_26_Voltar_di" bpmnElement="Flow_26_Voltar"><di:waypoint x="2955" y="605" /><di:waypoint x="2600" y="605" /><di:waypoint x="2600" y="228" /><di:waypoint x="2580" y="228" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_27_di" bpmnElement="Flow_27"><di:waypoint x="3020" y="445" /><di:waypoint x="3130" y="445" /><di:waypoint x="3130" y="268" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_28_di" bpmnElement="Flow_28"><di:waypoint x="3200" y="228" /><di:waypoint x="3240" y="228" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_29_di" bpmnElement="Flow_29"><di:waypoint x="3380" y="228" /><di:waypoint x="3490" y="228" /><di:waypoint x="3490" y="410" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_30_di" bpmnElement="Flow_30"><di:waypoint x="3560" y="450" /><di:waypoint x="3600" y="450" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_31_Sim_di" bpmnElement="Flow_31_Sim"><di:waypoint x="3650" y="450" /><di:waypoint x="3690" y="445" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_31_Nao_di" bpmnElement="Flow_31_Nao"><di:waypoint x="3625" y="475" /><di:waypoint x="3625" y="585" /><di:waypoint x="3690" y="585" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_32_Negado_di" bpmnElement="Flow_32_Negado"><di:waypoint x="3810" y="585" /><di:waypoint x="3850" y="585" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_32_di" bpmnElement="Flow_32"><di:waypoint x="3820" y="445" /><di:waypoint x="3930" y="445" /><di:waypoint x="3930" y="268" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_33_di" bpmnElement="Flow_33"><di:waypoint x="4000" y="228" /><di:waypoint x="4040" y="228" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_34_di" bpmnElement="Flow_34"><di:waypoint x="4095" y="268" /><di:waypoint x="4100" y="440" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_35_di" bpmnElement="Flow_35"><di:waypoint x="4160" y="480" /><di:waypoint x="4230" y="480" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_Conta_Banco_di" bpmnElement="Association_Conta_Banco"><di:waypoint x="945" y="610" /><di:waypoint x="3165" y="645" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_Grupo_Banco_di" bpmnElement="Association_Grupo_Banco"><di:waypoint x="1730" y="490" /><di:waypoint x="3165" y="645" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_Tarefa_Banco_di" bpmnElement="Association_Tarefa_Banco"><di:waypoint x="2955" y="485" /><di:waypoint x="3165" y="620" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_Estado_Banco_di" bpmnElement="Association_Estado_Banco"><di:waypoint x="3755" y="485" /><di:waypoint x="3190" y="645" /></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

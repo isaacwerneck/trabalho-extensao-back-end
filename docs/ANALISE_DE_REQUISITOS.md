@@ -304,3 +304,5 @@ O diagrama BPMN será criado a partir dos seguintes processos:
 6. encerramento da sessão.
 
 O fluxo principal deverá representar a interação entre usuário, aplicação web e banco de dados, incluindo os caminhos alternativos de credenciais inválidas, código inexistente e acesso não autorizado.
+
+O processo foi modelado e está documentado em [`BPMN.md`](./BPMN.md). O arquivo editável está em [`BPMN_ORGANIZADOR.bpmn`](./BPMN_ORGANIZADOR.bpmn) e a representação visual está em [`BPMN_ORGANIZADOR.svg`](./BPMN_ORGANIZADOR.svg).

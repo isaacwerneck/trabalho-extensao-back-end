@@ -16,9 +16,9 @@
 - [x] Escrever os requisitos não funcionais.
 - [x] Definir as regras de negócio.
 - [x] Registrar critérios de aceite para as funções principais.
-- [ ] Modelar em BPMN o fluxo principal de criação e execução de um trabalho em grupo.
+- [x] Modelar em BPMN o fluxo principal de criação e execução de um trabalho em grupo.
 - [x] Salvar a análise em `docs/ANALISE_DE_REQUISITOS.md`.
-- [ ] Salvar ou referenciar o diagrama BPMN dentro da documentação.
+- [x] Salvar ou referenciar o diagrama BPMN dentro da documentação.
 
 ## 3. Banco de dados
 
@@ -85,4 +85,4 @@
 
 ## Etapa atual
 
-Próxima atividade: modelar em BPMN os processos definidos na análise de requisitos.
+Próxima atividade: desenhar e documentar o banco de dados SQLite.
