@@ -1,0 +1,19 @@
+{
+  "name": "organizador-trabalhos-grupo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Organizador simples de trabalhos e tarefas em grupo.",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "init-db": "node database/init-db.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

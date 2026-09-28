@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Organiza — Entrar</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+</head>
+<body data-page="auth" class="auth-page">
+    <main class="auth-shell">
+        <section class="brand-panel" aria-labelledby="brand-title">
+            <p class="eyebrow">Trabalho em equipe sem confusão</p>
+            <h1 id="brand-title">Organiza</h1>
+            <p>Crie um grupo, compartilhe o código e acompanhe as tarefas em um só lugar.</p>
+            <ul class="benefits">
+                <li>Entrada rápida por código</li>
+                <li>Tarefas compartilhadas</li>
+                <li>Progresso visível para todos</li>
+            </ul>
+        </section>
+
+        <section class="auth-card" aria-labelledby="auth-title">
+            <div class="auth-tabs" role="tablist" aria-label="Acesso">
+                <button class="tab-button active" type="button" data-auth-tab="login" role="tab" aria-selected="true">Entrar</button>
+                <button class="tab-button" type="button" data-auth-tab="register" role="tab" aria-selected="false">Criar conta</button>
+            </div>
+
+            <div id="auth-message" class="message" role="status" aria-live="polite"></div>
+
+            <form id="login-form" class="auth-form">
+                <div>
+                    <p class="eyebrow">Bem-vindo de volta</p>
+                    <h2 id="auth-title">Entre na sua conta</h2>
+                </div>
+                <label>
+                    Usuário
+                    <input name="username" autocomplete="username" minlength="3" maxlength="30" required>
+                </label>
+                <label>
+                    Senha
+                    <input name="password" type="password" autocomplete="current-password" minlength="8" maxlength="128" required>
+                </label>
+                <button class="primary-button" type="submit">Entrar</button>
+            </form>
+
+            <form id="register-form" class="auth-form" hidden>
+                <div>
+                    <p class="eyebrow">Comece agora</p>
+                    <h2>Crie sua conta</h2>
+                </div>
+                <label>
+                    Usuário
+                    <input name="username" autocomplete="username" minlength="3" maxlength="30" required>
+                </label>
+                <label>
+                    Senha
+                    <input name="password" type="password" autocomplete="new-password" minlength="8" maxlength="128" required>
+                </label>
+                <button class="primary-button" type="submit">Criar conta</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Organiza — Grupos</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+</head>
+<body data-page="dashboard">
+    <header class="topbar">
+        <a class="logo" href="/app.html">Organiza</a>
+        <div class="user-menu">
+            <span id="current-user"></span>
+            <button id="logout-button" class="text-button" type="button">Sair</button>
+        </div>
+    </header>
+
+    <main class="dashboard-shell">
+        <aside class="groups-sidebar">
+            <div>
+                <p class="eyebrow">Seus espaços</p>
+                <h1>Grupos</h1>
+            </div>
+
+            <div class="group-actions">
+                <details>
+                    <summary>Criar grupo</summary>
+                    <form id="create-group-form" class="compact-form">
+                        <label>
+                            Nome do grupo
+                            <input name="name" maxlength="80" required placeholder="Ex.: Projeto de extensão">
+                        </label>
+                        <button class="primary-button" type="submit">Criar</button>
+                    </form>
+                </details>
+
+                <details>
+                    <summary>Entrar com código</summary>
+                    <form id="join-group-form" class="compact-form">
+                        <label>
+                            Código do grupo
+                            <input name="inviteCode" minlength="8" maxlength="8" required placeholder="ABC12345" autocapitalize="characters">
+                        </label>
+                        <button class="secondary-button" type="submit">Entrar</button>
+                    </form>
+                </details>
+            </div>
+
+            <nav id="groups-list" class="groups-list" aria-label="Meus grupos"></nav>
+        </aside>
+
+        <section class="workspace">
+            <div id="app-message" class="message" role="status" aria-live="polite"></div>
+
+            <div id="empty-workspace" class="empty-state">
+                <span class="empty-icon" aria-hidden="true">✓</span>
+                <h2>Escolha um grupo</h2>
+                <p>Abra um grupo existente ou crie um novo para começar.</p>
+            </div>
+
+            <div id="group-workspace" hidden>
+                <header class="group-header">
+                    <div>
+                        <p class="eyebrow">Grupo atual</p>
+                        <h2 id="group-name"></h2>
+                        <p id="group-members" class="muted"></p>
+                    </div>
+                    <div class="invite-card">
+                        <span>Código de convite</span>
+                        <strong id="invite-code"></strong>
+                        <button id="copy-code-button" class="text-button" type="button">Copiar</button>
+                    </div>
+                </header>
+
+                <form id="create-task-form" class="task-form">
+                    <label class="sr-only" for="task-title">Nova tarefa</label>
+                    <input id="task-title" name="title" maxlength="120" required placeholder="O que precisa ser feito?">
+                    <button class="primary-button" type="submit">Adicionar tarefa</button>
+                </form>
+
+                <div class="tasks-heading">
+                    <h3>Tarefas</h3>
+                    <span id="tasks-summary" class="status-pill"></span>
+                </div>
+                <div id="tasks-list" class="tasks-list"></div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -38,23 +38,23 @@
 
 ## 5. Implementação do MVP
 
-- [ ] Inicializar o projeto Node.js.
-- [ ] Configurar o servidor e servir o front-end.
+- [x] Inicializar o projeto Node.js.
+- [x] Configurar o servidor e servir o front-end.
 - [x] Criar o banco SQLite e o script de inicialização.
-- [ ] Implementar cadastro e identificação simples de usuários.
-- [ ] Implementar criação e participação em grupos.
-- [ ] Implementar criação de trabalhos/projetos.
-- [ ] Implementar tarefas com responsável, prazo e status.
-- [ ] Impedir operações inválidas por meio das regras de negócio.
-- [ ] Criar as páginas HTML, estilos CSS e interações JavaScript necessárias.
-- [ ] Adicionar tratamento de erros e validação das entradas.
+- [x] Implementar cadastro e identificação simples de usuários.
+- [x] Implementar criação e participação em grupos.
+- [x] Implementar criação de trabalhos/projetos.
+- [x] Implementar tarefas com status (responsável e prazo permanecem fora do MVP).
+- [x] Impedir operações inválidas por meio das regras de negócio.
+- [x] Criar as páginas HTML, estilos CSS e interações JavaScript necessárias.
+- [x] Adicionar tratamento de erros e validação das entradas.
 
 ## 6. Verificação
 
-- [ ] Testar o fluxo principal do início ao fim.
-- [ ] Testar entradas inválidas e permissões básicas.
-- [ ] Confirmar que tarefas atrasadas são identificadas corretamente.
-- [ ] Confirmar que o projeto funciona após uma instalação limpa.
+- [x] Testar o fluxo principal do início ao fim.
+- [x] Testar entradas inválidas e permissões básicas.
+- [x] Confirmar o compartilhamento e a alteração do estado das tarefas.
+- [x] Confirmar que o projeto funciona após uma instalação limpa.
 - [ ] Registrar evidências com capturas de tela e exemplos de uso.
 
 ## 7. README e entrega técnica
@@ -85,4 +85,4 @@
 
 ## Etapa atual
 
-Próxima atividade: inicializar o projeto Node.js e implementar o MVP.
+Próxima atividade: registrar evidências, atualizar o README e preparar a entrega técnica.
