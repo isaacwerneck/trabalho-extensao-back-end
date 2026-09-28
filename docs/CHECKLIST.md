@@ -22,25 +22,25 @@
 
 ## 3. Banco de dados
 
-- [ ] Identificar as entidades e seus atributos.
-- [ ] Definir relacionamentos e cardinalidades.
-- [ ] Definir chaves primárias e estrangeiras.
-- [ ] Criar o modelo inicial do banco SQLite.
-- [ ] Documentar as tabelas em `docs/BANCO_DE_DADOS.md`.
-- [ ] Revisar o modelo antes de iniciar as rotas da API.
+- [x] Identificar as entidades e seus atributos.
+- [x] Definir relacionamentos e cardinalidades.
+- [x] Definir chaves primárias e estrangeiras.
+- [x] Criar o modelo inicial do banco SQLite.
+- [x] Documentar as tabelas em `docs/BANCO_DE_DADOS.md`.
+- [x] Revisar o modelo antes de iniciar as rotas da API.
 
 ## 4. Arquitetura e documentação técnica
 
-- [ ] Definir a organização mínima do front-end, back-end e banco.
-- [ ] Definir as rotas da API e seus formatos de entrada e saída.
-- [ ] Registrar as tecnologias escolhidas e suas justificativas.
-- [ ] Documentar a arquitetura em `docs/ARQUITETURA.md`.
+- [x] Definir a organização mínima do front-end, back-end e banco.
+- [x] Definir as rotas da API e seus formatos de entrada e saída.
+- [x] Registrar as tecnologias escolhidas e suas justificativas.
+- [x] Documentar a arquitetura em `docs/ARQUITETURA.md`.
 
 ## 5. Implementação do MVP
 
 - [ ] Inicializar o projeto Node.js.
 - [ ] Configurar o servidor e servir o front-end.
-- [ ] Criar o banco SQLite e o script de inicialização.
+- [x] Criar o banco SQLite e o script de inicialização.
 - [ ] Implementar cadastro e identificação simples de usuários.
 - [ ] Implementar criação e participação em grupos.
 - [ ] Implementar criação de trabalhos/projetos.
@@ -85,4 +85,4 @@
 
 ## Etapa atual
 
-Próxima atividade: desenhar e documentar o banco de dados SQLite.
+Próxima atividade: inicializar o projeto Node.js e implementar o MVP.
