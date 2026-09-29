@@ -3,7 +3,7 @@
 ## Identificação
 
 - **Projeto:** Organiza — Organizador de Trabalhos em Grupo
-- **Integrantes:** Isaac Azevedo Werneck e Tassia Carolina de Mello Costa
+- **Integrantes:** Isaac Azevedo Werneck (matrícula 2024101179) e Tassia Carolina de Mello Costa (matrícula 2024200009)
 - **Data da verificação:** 28/09/2026
 - **Repositório:** https://github.com/isaacwerneck/trabalho-extensao-back-end
 

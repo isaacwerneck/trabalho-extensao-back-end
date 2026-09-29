@@ -2,8 +2,8 @@
 
 ## Integrantes
 
-- Tassia Carolina de Mello Costa
-- Isaac Azevedo Werneck
+- Tassia Carolina de Mello Costa — matrícula 2024200009
+- Isaac Azevedo Werneck — matrícula 2024101179
 
 Os dois integrantes participarão igualmente das atividades de análise, documentação, front-end, back-end, banco de dados, testes e apresentação.
 

@@ -105,8 +105,8 @@ As senhas são protegidas com `scrypt` e salt aleatório. A sessão usa token al
 
 ## Integrantes
 
-- Isaac Azevedo Werneck
-- Tassia Carolina de Mello Costa
+- Isaac Azevedo Werneck — matrícula 2024101179
+- Tassia Carolina de Mello Costa — matrícula 2024200009
 
 Os integrantes dividem igualmente as atividades do projeto.
 
