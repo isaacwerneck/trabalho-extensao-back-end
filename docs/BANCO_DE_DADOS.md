@@ -170,7 +170,7 @@ As restrições `UNIQUE` também criam índices para nome de usuário e código 
 - [`../database/schema.sql`](../database/schema.sql): definição reproduzível das tabelas, restrições e índices.
 - [`../database/init-db.js`](../database/init-db.js): cria o arquivo local `app.db`.
 - [`../database/test-db.js`](../database/test-db.js): valida o esquema em um banco temporário.
-- `database/app.db`: banco local gerado e ignorado pelo Git.
+- `database/app.db`: banco SQLite vazio, pronto para avaliação e incluído no repositório.
 
 ## 8. Comandos
 

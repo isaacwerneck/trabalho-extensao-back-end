@@ -37,7 +37,7 @@ npm install
 npm run init-db
 ```
 
-O banco local é criado em `database/app.db`. Esse arquivo não é enviado ao GitHub.
+O repositório já inclui um `database/app.db` vazio e pronto para avaliação. O comando `npm run init-db` também cria ou atualiza sua estrutura a partir de `database/schema.sql`.
 
 ## Execução
 
@@ -67,7 +67,7 @@ Os testes verificam a criação do banco e o fluxo completo da API: usuários, a
 
 ```text
 app/
-├── database/   # esquema SQL e inicialização do SQLite
+├── database/   # banco SQLite, esquema SQL e inicialização
 ├── docs/       # requisitos, BPMN, banco, arquitetura e evidências
 ├── public/     # páginas, estilos e JavaScript do navegador
 ├── src/        # servidor, API e acesso ao banco
