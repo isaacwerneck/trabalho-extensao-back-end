@@ -55,25 +55,25 @@
 - [x] Testar entradas inválidas e permissões básicas.
 - [x] Confirmar o compartilhamento e a alteração do estado das tarefas.
 - [x] Confirmar que o projeto funciona após uma instalação limpa.
-- [ ] Registrar evidências com capturas de tela e exemplos de uso.
+- [x] Registrar evidências de testes e exemplos de uso.
 
 ## 7. README e entrega técnica
 
-- [ ] Criar ou atualizar `README.md` com resumo do projeto.
-- [ ] Documentar requisitos de instalação.
-- [ ] Documentar como configurar o banco e executar o sistema.
-- [ ] Documentar as funções principais e a estrutura das pastas.
-- [ ] Incluir integrantes e link para a documentação.
-- [ ] Publicar o projeto em um repositório acessível ao professor.
+- [x] Criar ou atualizar `README.md` com resumo do projeto.
+- [x] Documentar requisitos de instalação.
+- [x] Documentar como configurar o banco e executar o sistema.
+- [x] Documentar as funções principais e a estrutura das pastas.
+- [x] Incluir integrantes e link para a documentação.
+- [x] Publicar o projeto em um repositório acessível ao professor.
 
 ## 8. PDF da primeira entrega
 
-- [ ] Consolidar problema, objetivo, requisitos, BPMN, banco e arquitetura.
-- [ ] Incluir tecnologias e justificativas.
-- [ ] Incluir imagens e evidências do sistema funcionando.
-- [ ] Incluir o link do repositório.
-- [ ] Revisar nomes, texto e instruções de execução.
-- [ ] Gerar e conferir visualmente o PDF final.
+- [x] Consolidar problema, objetivo, requisitos, BPMN, banco e arquitetura.
+- [x] Incluir tecnologias e justificativas.
+- [x] Incluir imagens e evidências do sistema funcionando.
+- [x] Incluir o link do repositório.
+- [x] Revisar nomes, texto e instruções de execução.
+- [x] Gerar e conferir visualmente o PDF final.
 
 ## 9. Validação e envio
 
@@ -85,4 +85,4 @@
 
 ## Etapa atual
 
-Próxima atividade: registrar evidências, atualizar o README e preparar a entrega técnica.
+Próxima atividade: enviar o PDF ao professor para validação e aplicar o feedback recebido.
