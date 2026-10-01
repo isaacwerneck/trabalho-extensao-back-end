@@ -81,9 +81,9 @@
 - [x] Enviar o link do projeto ao professor pelo WhatsApp.
 - [x] Receber a aprovação do professor para realizar a entrega no AVA.
 - [x] Aplicar a orientação recebida e preparar um PDF resumido para avaliação.
-- [ ] Cada integrante enviar individualmente o material na Primeira Entrega do AVA.
-- [ ] Conferir se os envios foram registrados no AVA.
-- [ ] Usar o feedback da primeira entrega para preparar a segunda entrega.
+- [x] Cada integrante enviar individualmente o material na Primeira Entrega do AVA.
+- [x] Conferir se os envios foram registrados no AVA.
+- [x] Usar o feedback da primeira entrega para preparar a segunda entrega.
 
 ## Etapa atual
 
