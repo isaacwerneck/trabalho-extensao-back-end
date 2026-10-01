@@ -7,7 +7,7 @@
 - [x] Registrar os integrantes e as responsabilidades iniciais.
 - [x] Escrever o problema, o público atendido e o objetivo do sistema.
 - [x] Definir o escopo mínimo da primeira versão (MVP).
-- [ ] Enviar a proposta resumida ao professor para validação prévia, se necessário.
+- [x] Enviar a proposta ao professor e obter a validação do projeto.
 
 ## 2. Análise de requisitos e BPMN
 
@@ -68,21 +68,23 @@
 
 ## 8. PDF da primeira entrega
 
-- [x] Consolidar problema, objetivo, requisitos, BPMN, banco e arquitetura.
-- [x] Incluir tecnologias e justificativas.
-- [x] Incluir imagens e evidências do sistema funcionando.
+- [x] Incluir a identificação e a matrícula dos três integrantes.
+- [x] Apresentar uma descrição básica do projeto.
+- [x] Resumir o estado da análise de requisitos.
+- [x] Registrar a situação atual do MVP e dos testes.
 - [x] Incluir o link do repositório.
-- [x] Revisar nomes, texto e instruções de execução.
-- [x] Gerar e conferir visualmente o PDF final.
+- [x] Manter o documento curto, conforme orientação do professor.
+- [x] Gerar e conferir visualmente o PDF resumido.
 
 ## 9. Validação e envio
 
-- [ ] Mandar ao professor, pelo WhatsApp, uma mensagem com o PDF e o link do projeto.
-- [ ] Aplicar o feedback recebido.
+- [x] Enviar o link do projeto ao professor pelo WhatsApp.
+- [x] Receber a aprovação do professor para realizar a entrega no AVA.
+- [x] Aplicar a orientação recebida e preparar um PDF resumido para avaliação.
 - [ ] Cada integrante enviar individualmente o material na Primeira Entrega do AVA.
 - [ ] Conferir se os envios foram registrados no AVA.
 - [ ] Usar o feedback da primeira entrega para preparar a segunda entrega.
 
 ## Etapa atual
 
-Próxima atividade: enviar o PDF ao professor para validação e aplicar o feedback recebido.
+Próxima atividade: cada integrante enviar o PDF no AVA e conferir o registro da entrega.

@@ -4,8 +4,9 @@
 
 - Tassia Carolina de Mello Costa — matrícula 2024200009
 - Isaac Azevedo Werneck — matrícula 2024101179
+- Cauã Faria de Pretes Cruz — matrícula 2024201042
 
-Os dois integrantes participarão igualmente das atividades de análise, documentação, front-end, back-end, banco de dados, testes e apresentação.
+Os três integrantes participarão igualmente das atividades de análise, documentação, front-end, back-end, banco de dados, testes e apresentação.
 
 ## Tema
 

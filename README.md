@@ -107,8 +107,9 @@ As senhas são protegidas com `scrypt` e salt aleatório. A sessão usa token al
 
 - Isaac Azevedo Werneck — matrícula 2024101179
 - Tassia Carolina de Mello Costa — matrícula 2024200009
+- Cauã Faria de Pretes Cruz — matrícula 2024201042
 
-Os integrantes dividem igualmente as atividades do projeto.
+Os três integrantes dividem igualmente as atividades do projeto.
 
 ## Estado do projeto
 
