@@ -9,6 +9,7 @@ const schema = readFileSync(
 
 export function createDatabase(path) {
     const database = new DatabaseSync(path);
+    database.exec('PRAGMA foreign_keys = ON');
     database.exec(schema);
     return database;
 }

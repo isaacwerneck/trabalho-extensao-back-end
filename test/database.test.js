@@ -1,11 +1,8 @@
-import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { DatabaseSync } from 'node:sqlite';
 
-const schema = readFileSync(resolve(import.meta.dirname, 'schema.sql'), 'utf8');
-const database = new DatabaseSync(':memory:');
-database.exec(schema);
+import assert from 'node:assert/strict';
+import { createDatabase } from '../src/database.js';
+
+const database = createDatabase(':memory:');
 
 const insertUser = database.prepare(`
     INSERT INTO users (username, password_hash)
@@ -45,6 +42,31 @@ const taskId = Number(database.prepare(`
     VALUES (?, ?, ?)
 `).run(groupId, 'Documentar o banco de dados', isaacId).lastInsertRowid);
 
+const insertAssignee = database.prepare(`
+    INSERT INTO task_assignees (task_id, group_id, user_id)
+    VALUES (?, ?, ?)
+`);
+
+insertAssignee.run(taskId, groupId, isaacId);
+insertAssignee.run(taskId, groupId, tassiaId);
+
+assert.throws(
+    () => insertAssignee.run(taskId, groupId, tassiaId),
+    undefined,
+    'Um integrante não pode ser atribuído duas vezes à mesma tarefa.'
+);
+
+const outroUsuarioId = Number(insertUser.run(
+    'OutroUsuario',
+    'hash-outro'
+).lastInsertRowid);
+
+assert.throws(
+    () => insertAssignee.run(taskId, groupId, outroUsuarioId),
+    undefined,
+    'Não deve ser possível atribuir tarefa a integrante de outro grupo.'
+);
+
 database.prepare(`
     UPDATE tasks
     SET is_completed = 1, completed_at = CURRENT_TIMESTAMP
@@ -74,14 +96,19 @@ database.prepare('DELETE FROM groups WHERE id = ?').run(groupId);
 
 assert.equal(
     database.prepare('SELECT count(*) AS total FROM tasks').get().total,
-    0,
-    'As tarefas devem ser removidas junto com o grupo.'
+    0
 );
+
 assert.equal(
     database.prepare('SELECT count(*) AS total FROM group_members').get().total,
-    0,
-    'Os vínculos de participantes devem ser removidos junto com o grupo.'
+    0
+);
+
+assert.equal(
+    database.prepare('SELECT count(*) AS total FROM task_assignees').get().total,
+    0
 );
 
 database.close();
+
 console.log('Banco de dados validado com sucesso.');

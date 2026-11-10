@@ -44,8 +44,30 @@ CREATE TABLE IF NOT EXISTS tasks (
     CHECK (
         (is_completed = 0 AND completed_at IS NULL)
         OR (is_completed = 1 AND completed_at IS NOT NULL)
-    )
+    ),
+    UNIQUE (id, group_id)
 ) STRICT;
+
+CREATE TABLE IF NOT EXISTS task_assignees (
+    task_id INTEGER NOT NULL,
+    group_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    assigned_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (task_id, user_id),
+
+    FOREIGN KEY (task_id, group_id)
+        REFERENCES tasks(id, group_id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (group_id, user_id)
+        REFERENCES group_members(group_id, user_id)
+        ON DELETE CASCADE
+) STRICT;
+
+CREATE INDEX IF NOT EXISTS idx_task_assignees_user
+    ON task_assignees(user_id);
+
 
 CREATE TABLE IF NOT EXISTS sessions (
     token_hash TEXT PRIMARY KEY
