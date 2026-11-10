@@ -7,7 +7,7 @@
 - [x] Registrar os integrantes e as responsabilidades iniciais.
 - [x] Escrever o problema, o público atendido e o objetivo do sistema.
 - [x] Definir o escopo mínimo da primeira versão (MVP).
-- [ ] Enviar a proposta resumida ao professor para validação prévia, se necessário.
+- [x] Enviar a proposta ao professor e obter a validação do projeto.
 
 ## 2. Análise de requisitos e BPMN
 
@@ -55,34 +55,36 @@
 - [x] Testar entradas inválidas e permissões básicas.
 - [x] Confirmar o compartilhamento e a alteração do estado das tarefas.
 - [x] Confirmar que o projeto funciona após uma instalação limpa.
-- [ ] Registrar evidências com capturas de tela e exemplos de uso.
+- [x] Registrar evidências de testes e exemplos de uso.
 
 ## 7. README e entrega técnica
 
-- [ ] Criar ou atualizar `README.md` com resumo do projeto.
-- [ ] Documentar requisitos de instalação.
-- [ ] Documentar como configurar o banco e executar o sistema.
-- [ ] Documentar as funções principais e a estrutura das pastas.
-- [ ] Incluir integrantes e link para a documentação.
-- [ ] Publicar o projeto em um repositório acessível ao professor.
+- [x] Criar ou atualizar `README.md` com resumo do projeto.
+- [x] Documentar requisitos de instalação.
+- [x] Documentar como configurar o banco e executar o sistema.
+- [x] Documentar as funções principais e a estrutura das pastas.
+- [x] Incluir integrantes e link para a documentação.
+- [x] Publicar o projeto em um repositório acessível ao professor.
 
 ## 8. PDF da primeira entrega
 
-- [ ] Consolidar problema, objetivo, requisitos, BPMN, banco e arquitetura.
-- [ ] Incluir tecnologias e justificativas.
-- [ ] Incluir imagens e evidências do sistema funcionando.
-- [ ] Incluir o link do repositório.
-- [ ] Revisar nomes, texto e instruções de execução.
-- [ ] Gerar e conferir visualmente o PDF final.
+- [x] Incluir a identificação e a matrícula dos três integrantes.
+- [x] Apresentar uma descrição básica do projeto.
+- [x] Resumir o estado da análise de requisitos.
+- [x] Registrar a situação atual do MVP e dos testes.
+- [x] Incluir o link do repositório.
+- [x] Manter o documento curto, conforme orientação do professor.
+- [x] Gerar e conferir visualmente o PDF resumido.
 
 ## 9. Validação e envio
 
-- [ ] Mandar ao professor, pelo WhatsApp, uma mensagem com o PDF e o link do projeto.
-- [ ] Aplicar o feedback recebido.
-- [ ] Cada integrante enviar individualmente o material na Primeira Entrega do AVA.
-- [ ] Conferir se os envios foram registrados no AVA.
-- [ ] Usar o feedback da primeira entrega para preparar a segunda entrega.
+- [x] Enviar o link do projeto ao professor pelo WhatsApp.
+- [x] Receber a aprovação do professor para realizar a entrega no AVA.
+- [x] Aplicar a orientação recebida e preparar um PDF resumido para avaliação.
+- [x] Cada integrante enviar individualmente o material na Primeira Entrega do AVA.
+- [x] Conferir se os envios foram registrados no AVA.
+- [x] Usar o feedback da primeira entrega para preparar a segunda entrega.
 
 ## Etapa atual
 
-Próxima atividade: registrar evidências, atualizar o README e preparar a entrega técnica.
+Próxima atividade: cada integrante enviar o PDF no AVA e conferir o registro da entrega.
