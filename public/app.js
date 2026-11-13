@@ -26,6 +26,24 @@ function setFormBusy(form, busy) {
     for (const element of form.elements) element.disabled = busy;
 }
 
+function initThemeToggle() {
+    const button = document.querySelector('#theme-toggle');
+    const applyTheme = isDark => {
+        const theme = isDark ? 'dark' : 'light';
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem('organiza-theme', theme);
+        button.textContent = isDark ? '\u2600' : '\u263e';
+        const action = isDark ? 'Ativar modo claro' : 'Ativar modo escuro';
+        button.setAttribute('aria-label', action);
+        button.title = action;
+    };
+
+    applyTheme(localStorage.getItem('organiza-theme') === 'dark');
+    button.addEventListener('click', () => {
+        applyTheme(document.documentElement.dataset.theme !== 'dark');
+    });
+}
+
 async function initAuth() {
     try {
         await request('/api/auth/me');
@@ -84,6 +102,7 @@ async function initAuth() {
 }
 
 async function initDashboard() {
+    initThemeToggle();
     const message = document.querySelector('#app-message');
     const groupsList = document.querySelector('#groups-list');
     const emptyWorkspace = document.querySelector('#empty-workspace');
